@@ -5,11 +5,6 @@ const paginate = require('../middlewares/pagination');
 const UserGages = require('../models/userGageSchema');
 const UserApprovals = require('../models/userApprovalStatus');
 
-router.get('/:filename/download', (req, res) => {
-  const file = `${__dirname}/static/${req.params.filename}.pdf`;
-  res.download(file);
-});
-
 router.get('/getUserStatus/:account', async (req, res) => {
   await UserGages.find({ gageJoinedUsersAddresses: req.params.account }, (err, data) => {
     if (err) {
