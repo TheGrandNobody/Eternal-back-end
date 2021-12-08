@@ -194,7 +194,7 @@ router.post('/removeUserFromGage', async (req, res) => {
             if (err1) {
               handleError(err1);
             }
-            if (data.gageJoinedUsersAddresses.length === 0) {
+            if (data.gageJoinedUsersAddresses.length === 1) {
               UserGages.findOneAndUpdate({ gageId: req.body.gageId }, { $set: { gageStatus: 'closed' } }, { new: true }, (err2, data2) => {
                 if (err2) {
                   res.json(err2);
