@@ -52,6 +52,10 @@ const UserGageSchema = new Schema(
       type: Array,
       default: [],
     },
+    gageForfietUsersAddresses: {
+      type: Array,
+      default: [],
+    },
     created_at: {
       type: Date,
       default: Date.now(),

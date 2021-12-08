@@ -33,12 +33,21 @@ router.get('/getAllGagesAddresses/:account', async (req, res) => {
 });
 
 router.get('/getAllGages/:account/:status', async (req, res) => {
-  const data = await paginate(
-    req,
-    UserGages,
-    UserGages.find({ gageStatus: req.params.status.toLowerCase(), gageJoinedUsersAddresses: req.params.account }).sort({ gageId: 1 })
-  )();
-  res.json(data);
+  if (req.params.status.toLowerCase() === 'closed') {
+    const data1 = await paginate(
+      req,
+      UserGages,
+      UserGages.find({ gageStatus: req.params.status.toLowerCase(), gageForfietUsersAddresses: req.params.account }).sort({ gageId: 1 })
+    )();
+    res.json(data1);
+  } else {
+    const data2 = await paginate(
+      req,
+      UserGages,
+      UserGages.find({ gageStatus: req.params.status.toLowerCase(), gageJoinedUsersAddresses: req.params.account }).sort({ gageId: 1 })
+    )();
+    res.json(data2);
+  }
 });
 
 router.post('/getUserOwnedGages', async (req, res) => {
@@ -188,7 +197,7 @@ router.post('/removeUserFromGage', async (req, res) => {
         }
         UserGages.findOneAndUpdate(
           { gageId: req.body.gageId },
-          { gageUsersJoined: data.gageJoinedUsersAddresses.length },
+          { gageUsersJoined: data.gageJoinedUsersAddresses.length, $addToSet: { gageForfietUsersAddresses: req.body.userAddress } },
           { new: true },
           (err1, data1) => {
             if (err1) {
