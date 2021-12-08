@@ -6,7 +6,7 @@ const UserGages = require('../models/userGageSchema');
 const UserApprovals = require('../models/userApprovalStatus');
 
 router.get('/:filename/download', (req, res) => {
-  const file = `${__dirname}/static/${req.params.filename}.pdf`;
+  const file = `routes/static/${req.params.filename}.pdf`;
   res.download(file);
 });
 
