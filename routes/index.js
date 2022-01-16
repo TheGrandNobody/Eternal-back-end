@@ -5,11 +5,8 @@ const paginate = require('../middlewares/pagination');
 const UserGages = require('../models/userGageSchema');
 const UserApprovals = require('../models/userApprovalStatus');
 
-router.get('/download/:file(*)',(req, res) => {
-  var file = req.params.file;
-  var fileLocation = path.join('./static',file);
-  console.log(fileLocation);
-  res.download(fileLocation, file); 
+router.get('/download/:file',(req, res) => {
+  res.download(`./static/${req.params.file}`); 
 });
 
 router.get('/getUserStatus/:account', async (req, res) => {

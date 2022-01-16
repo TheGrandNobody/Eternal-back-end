@@ -14,7 +14,7 @@ server.use('/api', routes);
 server.use(handleError);
 
 mongooseConnectionHandler
-  .connect('mongodb+srv://dbUser:testtesttest@cluster0.n6wy7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+  .connect('mongodb+srv://dbUser:testtesttest@cluster0.n6wy7.mongodb.net/eternal?retryWrites=true&w=majority', {
     useNewUrlParser: true,
   })
   .catch((err) => console.log(err));
