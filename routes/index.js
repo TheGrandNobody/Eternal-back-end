@@ -7,7 +7,7 @@ const UserApprovals = require('../models/userApprovalStatus');
 
 router.get('/download/:file',(req, res) => {
   console.log(req.params.file);
-  res.download(`./static/${req.params.file}`); 
+  res.download(`${__dirname}/static/${req.params.file}`); 
 });
 
 router.get('/getUserStatus/:account', async (req, res) => {
