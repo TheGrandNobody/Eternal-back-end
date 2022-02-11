@@ -3,15 +3,13 @@ const handleError = require('../middlewares/errorhandling');
 const router = express.Router();
 const paginate = require('../middlewares/pagination');
 const UserGages = require('../models/userGageSchema');
-const UserApprovals = require('../models/userApprovalStatus');
 
 router.get('/download/:file',(req, res) => {
-  console.log(req.params.file);
   res.download(`${__dirname}/static/${req.params.file}`); 
 });
 
 router.get('/getUserStatus/:account', async (req, res) => {
-  await UserGages.find({ gageJoinedUsersAddresses: req.params.account }, (err, data) => {
+  await UserGages.find({ receiver: req.params.account }, (err, data) => {
     if (err) {
       res.json(err);
     }
@@ -114,32 +112,6 @@ router.post('/findAndUpdateGageStatus', async (req, res) => {
     res.json({ result: data });
     return;
   });
-});
-
-router.post('/createUserApprovalStatus', async (req, res) => {
-  const isExist = await UserApprovals.findOne({ account: req.body.account }).exec();
-  if (!isExist) {
-    const data = new UserApprovals({ account: req.body.account, approvalStatus: req.body.status });
-    await data.save();
-    res.json({ message: 'approval Created Successfully !' });
-    return;
-  }
-  res.json({ message: 'approval is already there !' });
-});
-
-router.get('/findUserApprovalStatus/:account', async (req, res) => {
-  await UserApprovals.findOne({ account: req.params.account }, (err, data) => {
-    if (err) {
-      res.json(err);
-      return;
-    }
-    res.json(data);
-    return;
-  })
-    .clone()
-    .catch(function (err) {
-      console.log(err);
-    });
 });
 
 router.post('/addUserToGage', async (req, res) => {

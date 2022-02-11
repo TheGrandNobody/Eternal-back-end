@@ -3,18 +3,9 @@ const { Schema } = mongoose;
 
 const UserGageSchema = new Schema(
   {
-    amount: {
-      type: String,
-      required: 'Id is required !',
-    },
     gageId: {
       type: String,
       required: 'Gage Id is required !',
-      unique: true,
-    },
-    gageAddress: {
-      type: String,
-      default: null,
       unique: true,
     },
     gageType: {
@@ -22,39 +13,10 @@ const UserGageSchema = new Schema(
       default: null,
       required: 'Gage Type is required !',
     },
-    riskType: {
-      type: String,
-      required: 'Token Id is required !',
-    },
-    riskPercentage: {
-      type: String,
-      required: 'Category is required !',
-    },
-    ownedByAddress: {
+    receiver: {
       type: String,
       max: 500,
-      required: 'onBuyAddress is required!',
-    },
-    gageStatus: {
-      type: String,
-      default: 'pending',
-    },
-    gageTotalUsers: {
-      type: Number,
-      default: 2,
-    },
-    gageUsersJoined: {
-      type: Number,
-      default: 0,
-    },
-
-    gageJoinedUsersAddresses: {
-      type: Array,
-      default: [],
-    },
-    gageForfietUsersAddresses: {
-      type: Array,
-      default: [],
+      required: 'Receiver address is required!',
     },
     created_at: {
       type: Date,
