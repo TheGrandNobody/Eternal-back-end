@@ -8,7 +8,7 @@ router.get('/download/:file',(req, res) => {
 });
 
 router.get('/getUserStatus/:account', async (req, res) => {
-  await Gage.find({ receiver: req.params.account }, (err, data) => {
+  await Gage.find({ receiver: req.params.account, gageStatus: 'active' }, (err, data) => {
     if (err) {
       res.json(err);
     }
