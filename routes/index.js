@@ -24,7 +24,7 @@ router.get('/getAllGagesAddresses/:account', async (req, res) => {
   const data = await paginate(
     req,
     Gage,
-    Gage.find({ gageStatus: { $ne: 'closed' }, ownedByAddress: req.params.account }, { id: true})
+    Gage.find({ status: { $ne: 'closed' }, receiver: req.params.account }, { id: true})
   )();
   res.json(data);
 });
@@ -34,14 +34,14 @@ router.get('/getAllGages/:account/:status', async (req, res) => {
     const data1 = await paginate(
       req,
       Gage,
-      Gage.find({ gageStatus: req.params.status.toLowerCase(), gageForfietUsersAddresses: req.params.account }).sort({ id: 1 })
+      Gage.find({ status: req.params.status.toLowerCase(), receiver: req.params.account }).sort({ id: 1 })
     )();
     res.json(data1);
   } else {
     const data2 = await paginate(
       req,
       Gage,
-      Gage.find({ gageStatus: req.params.status.toLowerCase(), gageJoinedUsersAddresses: req.params.account }).sort({ id: 1 })
+      Gage.find({ status: req.params.status.toLowerCase(), receiver: req.params.account }).sort({ id: 1 })
     )();
     res.json(data2);
   }
