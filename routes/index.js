@@ -47,22 +47,6 @@ router.get('/getAllGages/:account/:status', async (req, res) => {
   }
 });
 
-router.post('/getUserOwnedGages', async (req, res) => {
-  const data = await paginate(
-    req,
-    Gage,
-    Gage.find({
-      amount: req.body.amount,
-      riskType: req.body.riskType,
-      riskPercentage: req.body.riskPercentage,
-      ownedByAddress: req.body.ownedByAddress,
-      gageType: req.body.gageType,
-      gageStatus: req.body.gageStatus,
-    })
-  )();
-  res.json(data);
-});
-
 router.post('/find-gage', async (req, res) => {
   await Gage.find(
     {
