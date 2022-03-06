@@ -8,7 +8,7 @@ router.get('/download/:file',(req, res) => {
 });
 
 router.get('/getUserStatus/:account', async (req, res) => {
-  await Gage.find({ receiver: req.params.account, gageStatus: 'active' }, (err, data) => {
+  await Gage.find({ receiver: req.params.account, status: 'active' }, (err, data) => {
     if (err) {
       res.json(err);
     }
@@ -18,15 +18,6 @@ router.get('/getUserStatus/:account', async (req, res) => {
     .catch(function (err) {
       console.log(err);
     });
-});
-
-router.get('/getAllGagesAddresses/:account', async (req, res) => {
-  const data = await paginate(
-    req,
-    Gage,
-    Gage.find({ status: { $ne: 'closed' }, receiver: req.params.account }, { id: true})
-  )();
-  res.json(data);
 });
 
 router.get('/getAllGages/:account/:status', async (req, res) => {
