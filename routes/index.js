@@ -21,21 +21,12 @@ router.get('/getUserStatus/:account', async (req, res) => {
 });
 
 router.get('/getAllGages/:account/:status', async (req, res) => {
-  if (req.params.status.toLowerCase() === 'closed') {
-    const data1 = await paginate(
-      req,
-      Gage,
-      Gage.find({ status: req.params.status.toLowerCase(), receiver: req.params.account }).sort({ id: 1 })
-    )();
-    res.json(data1);
-  } else {
-    const data2 = await paginate(
-      req,
-      Gage,
-      Gage.find({ status: req.params.status.toLowerCase(), receiver: req.params.account }).sort({ id: 1 })
-    )();
-    res.json(data2);
-  }
+  const data = await paginate(
+    req,
+    Gage,
+    Gage.find({ status: req.params.status.toLowerCase(), receiver: req.params.account }).sort({ id: 1 })
+  )();
+  res.json(data);
 });
 
 router.post('/find-gage', async (req, res) => {

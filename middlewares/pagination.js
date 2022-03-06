@@ -7,7 +7,7 @@ function paginate(req, model, query) {
 
     const result = {};
     // change model.length to model.countDocuments() because you are counting directly from mongodb
-    if (endIndex < (await model.countDocuments().exec())) {
+    if (endIndex < (await model.countDocuments({status: req.params.status.toLowerCase(), receiver: req.params.account}).exec())) {
       result.next = {
         page: page + 1,
         limit: limit,
@@ -24,7 +24,6 @@ function paginate(req, model, query) {
       return result;
     } catch (e) {
       console.log(e);
-      //   res.status(500).json({ message: e.message });
     }
   };
 }
