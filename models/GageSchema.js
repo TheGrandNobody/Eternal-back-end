@@ -30,6 +30,10 @@ const GageSchema = new Schema(
     created_at: {
       type: Date,
       default: Date.now(),
+    }, 
+    winner: {
+      type: Boolean,
+      default: false,
     }
   },
   {

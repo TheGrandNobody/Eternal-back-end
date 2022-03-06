@@ -53,7 +53,7 @@ router.post('/find-gage', async (req, res) => {
 });
 
 router.post('/findAndUpdateGageStatus', async (req, res) => {
-  Gage.updateOne({ id: req.body.id }, { $set: { status: req.body.status } }, (err, data) => {
+  Gage.updateOne({ id: req.body.id }, { $set: { status: req.body.status, winner: req.body.winner  } }, (err, data) => {
     if (err) {
       res.json(err);
       return;
